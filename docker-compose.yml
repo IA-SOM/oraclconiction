@@ -1,0 +1,28 @@
+version: '3'
+services:
+  ml_ystem_recommendation:
+    build:
+      context: .
+    volumes:
+      - ./src:/app/src:ro
+    container_name: system_recommendation
+    ports:
+      - "5000:5000"
+    networks:
+      - opt
+  oracl:
+    image: container-registry.oracle.com/database/free:latest
+    hostname: oracl
+    container_name: oracl
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PWD: 'samir5636123'
+    networks:
+      - opt
+    entrypoint: ['/opt/oracle/scripts/entrypoint.sh'] 
+    volumes:
+      - ./scripts/entrypoint.sh:/opt/oracle/scripts/entrypoint.sh
+networks:
+  opt:
+  

@@ -1,0 +1,3 @@
+cx_Oracle
+llamaapi
+flask==2.2.5

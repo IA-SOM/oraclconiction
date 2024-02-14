@@ -1,0 +1,65 @@
+query,query_optimized
+SELECT * FROM Professor WHERE department_id = 4;,SELECT * FROM Professor p WHERE p.department_id = 4 INDEX(p.department_id);
+SELECT * FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.ville = 'Rabat';,SELECT * FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.ville = 'Rabat' INDEX(s.ville);
+SELECT * FROM Classroom WHERE building_name = 'Building C' AND room_number = 102;,"SELECT * FROM Classroom c WHERE c.building_name = 'Building C' AND c.room_number = 102 INDEX(c.building_name, c.room_number);"
+SELECT * FROM Department WHERE department_name = 'Computer Science';,SELECT * FROM Department d WHERE d.department_name = 'Computer Science' INDEX(d.department_name); 
+SELECT * FROM Professor WHERE department_id = 4;,SELECT * FROM Professor p WHERE p.department_id = 4 INDEX(p.department_id);
+SELECT * FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.city = 'Rabat';,SELECT * FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.city = 'Rabat' INDEX(s.city);
+SELECT * FROM Classroom WHERE building_name = 'Building C' AND room_number = 102;,"SELECT * FROM Classroom c WHERE c.building_name = 'Building C' AND c.room_number = 102 INDEX(c.building_name, c.room_number);"
+SELECT * FROM Department WHERE department_name = 'Computer Science';,SELECT * FROM Department d WHERE d.department_name = 'Computer Science' INDEX(d.department_name); 
+SELECT * FROM Professor WHERE department_id = 2;,SELECT * FROM Professor p WHERE p.department_id = 2 INDEX(p.department_id);
+SELECT * FROM Student WHERE graduation_year = 2023;,SELECT * FROM Student s WHERE s.graduation_year = 2023 INDEX(s.graduation_year);
+SELECT * FROM Course WHERE course_code = 'CS101';,SELECT * FROM Course c WHERE c.course_code = 'CS101' INDEX(c.course_code);
+SELECT * FROM Classroom WHERE capacity >= 50;,SELECT * FROM Classroom c WHERE c.capacity >= 50 INDEX(c.capacity);
+SELECT * FROM Department WHERE department_head = 'John Doe';,SELECT * FROM Department d WHERE d.department_head = 'John Doe' INDEX(d.department_head);
+SELECT * FROM Professor WHERE salary > 60000 AND department_id = 3;,"SELECT * FROM Professor p WHERE p.salary > 60000 AND p.department_id = 3 INDEX(p.salary, p.department_id);"
+SELECT * FROM Student WHERE city = 'New York' AND graduation_year = 2022;,"SELECT * FROM Student s WHERE s.city = 'New York' AND s.graduation_year = 2022 INDEX(s.city, s.graduation_year);"
+SELECT * FROM Enrollment WHERE course_id = 101 AND semester = 'Fall 2023';,"SELECT * FROM Enrollment e WHERE e.course_id = 101 AND e.semester = 'Fall 2023' INDEX(e.course_id, e.semester);"
+SELECT * FROM Classroom WHERE building_name = 'Building B' AND room_number = 301 AND capacity >= 40;,"SELECT * FROM Classroom c WHERE c.building_name = 'Building B' AND c.room_number = 301 AND c.capacity >= 40 INDEX(c.building_name, c.room_number, c.capacity);"
+SELECT * FROM Course WHERE department_id = 4 AND credits > 3;,"SELECT * FROM Course c WHERE c.department_id = 4 AND c.credits > 3 INDEX(c.department_id, c.credits);"
+SELECT * FROM Professor WHERE department_id = 5 AND salary > 70000;,"SELECT * FROM Professor p WHERE p.department_id = 5 AND p.salary > 70000 INDEX(p.department_id, p.salary);"
+SELECT * FROM Student WHERE major = 'Engineering' AND graduation_year = 2024;,"SELECT * FROM Student s WHERE s.major = 'Engineering' AND s.graduation_year = 2024 INDEX(s.major, s.graduation_year);"
+SELECT * FROM Course WHERE credits >= 4 AND department_id = 2;,"SELECT * FROM Course c WHERE c.credits >= 4 AND c.department_id = 2 INDEX(c.credits, c.department_id);"
+SELECT * FROM Classroom WHERE building_name = 'Building A' AND capacity >= 30 AND capacity <= 50;,"SELECT * FROM Classroom c WHERE c.building_name = 'Building A' AND c.capacity >= 30 AND c.capacity <= 50 INDEX(c.building_name, c.capacity);"
+SELECT * FROM Department WHERE budget > 1000000;,SELECT * FROM Department d WHERE d.budget > 1000000 INDEX(d.budget);
+SELECT * FROM Professor WHERE tenure_year <= 2010 AND salary < 60000;,"SELECT * FROM Professor p WHERE p.tenure_year <= 2010 AND p.salary < 60000 INDEX(p.tenure_year, p.salary);"
+SELECT * FROM Enrollment WHERE semester = 'Spring 2024';,SELECT * FROM Enrollment e WHERE e.semester = 'Spring 2024' INDEX(e.semester);
+"SELECT * FROM Classroom WHERE room_number IN (101,102,103);","SELECT * FROM Classroom c WHERE c.room_number IN (101, 102, 103) INDEX(c.room_number);"
+SELECT * FROM Student WHERE graduation_year >= 2023 AND city = 'Los Angeles';,"SELECT * FROM Student s WHERE s.graduation_year >= 2023 AND s.city = 'Los Angeles' INDEX(s.graduation_year, s.city);"
+SELECT * FROM Course WHERE department_id = 3 AND credits >= 3 AND credits <= 5;,"SELECT * FROM Course c WHERE c.department_id = 3 AND c.credits >= 3 AND c.credits <= 5 INDEX(c.department_id, c.credits);"
+SELECT * FROM Professor WHERE department_id = 6 AND years_of_experience > 10;,"SELECT * FROM Professor p WHERE p.department_id = 6 AND p.years_of_experience > 10 INDEX(p.department_id, p.years_of_experience);"
+SELECT * FROM Student WHERE major = 'Biology' AND graduation_year = 2025;,"SELECT * FROM Student s WHERE s.major = 'Biology' AND s.graduation_year = 2025 INDEX(s.major, s.graduation_year);"
+SELECT * FROM Course WHERE credits >= 3 AND department_id = 1 AND semester = 'Fall 2024';,"SELECT * FROM Course c WHERE c.credits >= 3 AND c.department_id = 1 AND c.semester = 'Fall 2024' INDEX(c.credits, c.department_id, c.semester);"
+SELECT * FROM Classroom WHERE building_name = 'Building D' AND capacity >= 40;,"SELECT * FROM Classroom c WHERE c.building_name = 'Building D' AND c.capacity >= 40 INDEX(c.building_name, c.capacity);"
+SELECT * FROM Department WHERE budget >= 500000 AND budget <= 1000000;,SELECT * FROM Department d WHERE d.budget >= 500000 AND d.budget <= 1000000 INDEX(d.budget);
+SELECT * FROM Professor WHERE tenure_year BETWEEN 2005 AND 2010 AND salary < 70000;,"SELECT * FROM Professor p WHERE p.tenure_year BETWEEN 2005 AND 2010 AND p.salary < 70000 INDEX(p.tenure_year, p.salary);"
+SELECT * FROM Enrollment WHERE semester = 'Fall 2023' AND course_id = 102;,"SELECT * FROM Enrollment e WHERE e.semester = 'Fall 2023' AND e.course_id = 102 INDEX(e.semester, e.course_id);"
+"SELECT * FROM Classroom WHERE room_number IN (201, 202, 203);","SELECT * FROM Classroom c WHERE c.room_number IN (201, 202, 203) INDEX(c.room_number);"
+SELECT * FROM Student WHERE graduation_year >= 2024 AND city = 'Chicago';,"SELECT * FROM Student s WHERE s.graduation_year >= 2024 AND s.city = 'Chicago' INDEX(s.graduation_year, s.city);"
+SELECT * FROM Course WHERE department_id = 4 AND credits = 4;,"SELECT * FROM Course c WHERE c.department_id = 4 AND c.credits = 4 INDEX(c.department_id, c.credits);"
+SELECT * FROM Professor WHERE department_id = 7 AND years_of_experience > 15;,"SELECT * FROM Professor p WHERE p.department_id = 7 AND p.years_of_experience > 15 INDEX(p.department_id, p.years_of_experience);"
+SELECT * FROM Student WHERE major = 'Psychology' AND graduation_year = 2026;,"SELECT * FROM Student s WHERE s.major = 'Psychology' AND s.graduation_year = 2026 INDEX(s.major, s.graduation_year);"
+SELECT * FROM Course WHERE credits >= 3 AND department_id = 2 AND semester = 'Spring 2025';,"SELECT * FROM Course c WHERE c.credits >= 3 AND c.department_id = 2 AND c.semester = 'Spring 2025' INDEX(c.credits, c.department_id, c.semester);"
+SELECT * FROM Classroom WHERE building_name = 'Building E' AND capacity >= 50;,"SELECT * FROM Classroom c WHERE c.building_name = 'Building E' AND c.capacity >= 50 INDEX(c.building_name, c.capacity);"
+SELECT * FROM Department WHERE budget >= 800000 AND budget <= 1500000;,SELECT * FROM Department d WHERE d.budget >= 800000 AND d.budget <= 1500000 INDEX(d.budget);
+SELECT * FROM Professor WHERE tenure_year BETWEEN 2000 AND 2005 AND salary < 75000,"SELECT * FROM Professor p WHERE p.tenure_year BETWEEN 2000 AND 2005 AND p.salary < 75000 INDEX(p.tenure_year, p.salary);"
+SELECT * FROM Enrollment WHERE semester = 'Spring 2024' AND course_id = 103;,"SELECT * FROM Enrollment e WHERE e.semester = 'Spring 2024' AND e.course_id = 103 INDEX(e.semester, e.course_id);"
+"SELECT * FROM Classroom WHERE room_number IN (301, 302, 303);","SELECT * FROM Classroom c WHERE c.room_number IN (301, 302, 303) INDEX(c.room_number);"
+SELECT * FROM Student WHERE graduation_year >= 2025 AND city = 'Houston';,"SELECT * FROM Student s WHERE s.graduation_year >= 2025 AND s.city = 'Houston' INDEX(s.graduation_year, s.city);"
+SELECT * FROM Course WHERE department_id = 3 AND credits = 3;,"SELECT * FROM Course c WHERE c.department_id = 3 AND c.credits = 3 INDEX(c.department_id, c.credits);"
+"SELECT s.major, COUNT(*) as total_students FROM Student s INNER JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.major ORDER BY total_students DESC;	","SELECT s.major, COUNT(*) as total_students FROM Student s INNER JOIN Enrollment e ON s.student_id = e.student_id INDEX(s.student_id) GROUP BY s.major ORDER BY total_students DESC;"
+SELECT * FROM Student s LEFT JOIN Enrollment e ON s.student_id = e.student_id;,SELECT * FROM Student s LEFT JOIN Enrollment e ON s.student_id = e.student_id INDEX(s.student_id);
+SELECT * FROM Student s RIGHT JOIN Enrollment e ON s.student_id = e.student_id;,SELECT * FROM Student s RIGHT JOIN Enrollment e ON s.student_id = e.student_id INDEX(e.student_id);
+SELECT * FROM Student s FULL OUTER JOIN Enrollment e ON s.student_id = e.student_id;,"SELECT * FROM Student s FULL OUTER JOIN Enrollment e ON s.student_id = e.student_id INDEX(s.student_id, e.student_id);"
+"SELECT s.major, COUNT(*) as total_students FROM Student s INNER JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.major;","SELECT s.major, COUNT(*) as total_students FROM Student s INNER JOIN Enrollment e ON s.student_id = e.student_id INDEX(s.student_id) GROUP BY s.major;"
+SELECT * FROM Student s INNER JOIN Enrollment e ON s.student_id = e.student_id ORDER BY s.last_name ASC;,SELECT * FROM Student s INNER JOIN Enrollment e ON s.student_id = e.student_id INDEX(s.student_id) ORDER BY s.last_name ASC;
+"SELECT e1.employee_id, e1.employee_name, e2.employee_name AS supervisor_name FROM Employee e1 INNER JOIN Employee e2 ON e1.supervisor_id = e2.employee_id;","SELECT e1.employee_id, e1.employee_name, e2.employee_name AS supervisor_name FROM Employee e1 INNER JOIN Employee e2 ON e1.supervisor_id = e2.employee_id INDEX(e1.supervisor_id);"
+"SELECT e.employee_id, e.employee_name, d.department_name FROM Employee e CROSS JOIN Department d WHERE e.department_id = d.department_id;","SELECT e.employee_id, e.employee_name, d.department_name FROM Employee e CROSS JOIN Department d INDEX(d.department_id) WHERE e.department_id = d.department_id;"
+"SELECT o.order_id, o.order_date, c.customer_name FROM Orders o LEFT JOIN Customers c ON o.customer_id = c.customer_id AND c.city = 'New York';	sql SELECT o.order_id, o.order_date, c.customer_name FROM Orders o LEFT JOIN Customers c ON o.customer_id = c.customer_id ","SELECT o.order_id, o.order_date, c.customer_name FROM Orders o LEFT JOIN Customers c ON o.customer_id = c.customer_id INDEX(c.customer_id) WHERE c.city = 'New York';"
+"SELECT e.employee_id, e.employee_name, d.department_name FROM Employee e RIGHT JOIN (SELECT * FROM Department WHERE department_name = 'HR') d ON e.department_id = d.department_id;","SELECT e.employee_id, e.employee_name, d.department_name FROM Employee e RIGHT JOIN (SELECT * FROM Department WHERE department_name = 'HR') d ON e.department_id = d.department_id INDEX(e.department_id);"
+"SELECT d.department_id, d.department_name, COUNT(e.employee_id) AS total_employees FROM Department d FULL OUTER JOIN Employee e ON d.department_id = e.department_id GROUP BY d.department_id, d.department_name;","SELECT d.department_id, d.department_name, COUNT(e.employee_id) AS total_employees FROM Department d FULL OUTER JOIN Employee e ON d.department_id = e.department_id INDEX(d.department_id) GROUP BY d.department_id, d.department_name;"
+SELECT * FROM Products WHERE category = 'Electronics' OR category = 'Clothing';,"SELECT * FROM Products WHERE category IN ('Electronics', 'Clothing') INDEX(category);"
+SELECT * FROM Customers WHERE city = 'New York' OR city = 'Los Angeles';,"SELECT * FROM Customers WHERE city IN ('New York', 'Los Angeles') INDEX(city);"
+SELECT * FROM Orders WHERE order_date = '2023-01-01' OR delivery_date = '2023-12-31';,"SELECT * FROM Customers WHERE city IN ('New York', 'Los Angeles') INDEX(city);"
+SELECT * FROM Orders WHERE order_date = '2023-01-01' OR delivery_date = '2023-12-31';,SELECT * FROM Orders WHERE order_date = '2023-01-01' OR delivery_date = '2023-12-31' INDEX(order_date);
+SELECT * FROM Employees WHERE department = 'Sales' OR salary > 100000;,"SELECT * FROM Employees WHERE department = 'Sales' OR salary > 100000 INDEX(department, salary);"
