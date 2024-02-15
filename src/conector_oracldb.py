@@ -6,7 +6,7 @@ def conect():
     # Store credentials in environment variables (recommended)
     os.environ['ORACLE_USER'] = 'samir'
     os.environ['ORACLE_PASSWORD'] = 'samir'
-    os.environ['ORACLE_HOST'] = 'oracle-test'  # Use container IP
+    os.environ['ORACLE_HOST'] = 'oracle'  # Use container IP
 
     print(os.environ['ORACLE_USER'])
 
@@ -14,7 +14,7 @@ def conect():
     user = os.environ['ORACLE_USER'] if 'ORACLE_USER' in os.environ else 'sysdba'
 
     password = os.environ['ORACLE_PASSWORD'] if 'ORACLE_PASSWORD' in os.environ else 'samir5636123'
-    host = os.environ['ORACLE_HOST'] if 'ORACLE_HOST' in os.environ else 'oracle-test'
+    host = os.environ['ORACLE_HOST'] if 'ORACLE_HOST' in os.environ else 'oracle'
     port = 1521
     sid = 'FREE'
 

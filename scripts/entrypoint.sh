@@ -11,10 +11,10 @@ ORACLE_PASSWORD=samir5636123
 
 # SQL script to create user and grant privileges
 sqlplus / as sysdba <<EOF
-CREATE USER ml_user IDENTIFIED BY ml_password;
-GRANT CREATE SESSION TO ml_user;
-GRANT CREATE TABLE TO ml_user;
-GRANT DROP TABLE TO ml_user;
-GRANT ALTER ANY TABLE TO ml_user;
+CREATE USER samir IDENTIFIED BY samir;
+GRANT CREATE SESSION TO samir;
+GRANT CREATE TABLE TO samir;
+GRANT DROP TABLE TO samir;
+GRANT ALTER ANY TABLE TO samir;
 EXIT;
 EOF

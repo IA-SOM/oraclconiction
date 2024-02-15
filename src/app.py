@@ -28,8 +28,7 @@ import os
 
 app = Flask(__name__)
 
-
+conect()
 @app.route('/')
 def index():
-    conect()
     return f"<h1>connected</h1>"
