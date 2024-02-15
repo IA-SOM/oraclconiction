@@ -1,31 +1,53 @@
-import os
-import cx_Oracle
+# import getpass4
+import oracledb
 
-def conect():
+def conn():
 
-    # Store credentials in environment variables (recommended)
-    os.environ['ORACLE_USER'] = 'samir'
-    os.environ['ORACLE_PASSWORD'] = 'samir'
-    os.environ['ORACLE_HOST'] = 'oracle'  # Use container IP
+    # pw = getpass4.getpass("ziani")
 
-    print(os.environ['ORACLE_USER'])
+    connection = oracledb.connect(
+        user="ziani",
+        password="ziani",
+        dsn="oracle/freepdb1")
 
-    # Alternatively, use hardcoded credentials (not recommended for production)
-    user = os.environ['ORACLE_USER'] if 'ORACLE_USER' in os.environ else 'sysdba'
+    print("Successfully connected to Oracle Database")
 
-    password = os.environ['ORACLE_PASSWORD'] if 'ORACLE_PASSWORD' in os.environ else 'samir5636123'
-    host = os.environ['ORACLE_HOST'] if 'ORACLE_HOST' in os.environ else 'oracle'
-    port = 1521
-    sid = 'FREE'
+    cursor = connection.cursor()
 
-    print(host)
+    # Create a table
 
-    try:
-        dsn = cx_Oracle.makedsn(host, port, sid)
-        with cx_Oracle.connect(user, password, dsn) as con:
-            cursor = con.cursor()
+    cursor.execute("""
+        begin
+            execute immediate 'drop table todoitem';
+            exception when others then if sqlcode <> -942 then raise; end if;
+        end;""")
 
-            cursor.close()
-        print("connected ")
-    except cx_Oracle.DatabaseError as e:
-        print("Error connecting to Oracle database:", e)
+    cursor.execute("""
+        create table todoitem (
+            id number generated always as identity,
+            description varchar2(4000),
+            creation_ts timestamp with time zone default current_timestamp,
+            done number(1,0),
+            primary key (id))""")
+
+    # Insert some data
+
+    rows = [ ("Task 1", 0 ),
+            ("Task 2", 0 ),
+            ("Task 3", 1 ),
+            ("Task 4", 0 ),
+            ("Task 5", 1 ) ]
+
+    cursor.executemany("insert into todoitem (description, done) values(:1, :2)", rows)
+    print(cursor.rowcount, "Rows Inserted")
+
+    connection.commit()
+
+    # Now query the rows back
+    for row in cursor.execute('select description, done from todoitem'):
+        if (row[1]):
+            print(row[0], "is done")
+        else:
+            print(row[0], "is NOT done")
+
+

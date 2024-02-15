@@ -1,3 +1,5 @@
-cx_Oracle
-llamaapi
+getpass4
+oracledb
 flask==2.2.5
+llamaapi
+openai

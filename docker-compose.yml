@@ -17,7 +17,7 @@ services:
       - "1521:1521"
     environment:
       ORACLE_PWD: 'samir5636123'
-    entrypoint: ['/opt/oracle/scripts/entrypoint.sh'] 
+    # entrypoint: ['/opt/oracle/scripts/entrypoint.sh'] 
     volumes:
       - ./scripts/entrypoint.sh:/opt/oracle/scripts/entrypoint.sh
     networks:
